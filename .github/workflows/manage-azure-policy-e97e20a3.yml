@@ -1,0 +1,56 @@
+name: manage-azure-policy-e97e20a3
+on:
+  workflow_dispatch:
+    inputs:
+      remarks:
+        description: 'Reason for triggering the workflow run'
+        required: false
+        default: 'Updating Azure Policies'
+
+
+## Uncomment the following if you wish to automatically trigger workflow run with every commit
+#
+#  push:
+#    paths:
+#      - 'initiatives/Enable_Azure_Monitor_for_VMs_55f3eceb-5573-4f18-9695-226972c6d74a/**'
+#      - 'policies/_Preview_Network_traffic_data_collection_agent_should_be_installed_on_Linux_virtual_machines_04c4380f-3fae-46e8-96c9-30193528f602/**'
+#      - 'policies/Deploy_Diagnostic_Settings_for_Service_Bus_to_Log_Analytics_workspace_04d53d87-841c-4f23-8a5b-21564380b55e/**'
+#      - 'policies/Deploy_Log_Analytics_extension_for_Linux_VMs_053d3325-282c-4e5c-b944-24faffd30d77/**'
+#      - 'policies/Deploy_-_Configure_Log_Analytics_extension_to_be_enabled_on_Windows_virtual_machines_0868462e-646c-4fe3-9ced-a733534b6a2c/**'
+#      - 'policies/Deploy_Diagnostic_Settings_for_Search_Services_to_Log_Analytics_workspace_08ba64b8-738f-4918-9686-730d2ed79c7d/**'
+#      - 'policies/Deploy_-_Configure_Dependency_agent_to_be_enabled_on_Windows_virtual_machines_1c210e94-a481-4beb-95fa-1571b434fb04/**'
+#      - 'policies/Deploy_-_Configure_Dependency_agent_to_be_enabled_on_Windows_virtual_machine_scale_sets_3be22e3b-d919-47aa-805e-8985dbeb0ad9/**'
+#      - 'policies/Azure_Monitor_should_collect_activity_logs_from_all_regions_41388f1c-2db0-4c25-95b2-35d7f5ccbfa9/**'
+#      - 'policies/Log_Analytics_extension_should_be_enabled_in_virtual_machine_scale_sets_for_listed_virtual_machine_images_5c3bc7b8-a64c-4e08-a9cd-7ff0f31e1138/**'
+#      - 'policies/Azure_Machine_Learning_workspaces_should_use_user-assigned_managed_identity_5f0c7d88-c7de-45b8-ac49-db49e72eaa78/**'
+#      - 'policies/Virtual_machines_should_have_the_Log_Analytics_extension_installed_a70ca396-0a34-413a-88e1-b956c1e683be/**'
+#      - 'policies/_Preview_Log_Analytics_extension_should_be_installed_on_your_Windows_Azure_Arc_machines_d69b1763-b96d-40b8-a2d9-ca31e9fd0d3e/**'
+#      - .github/workflows/manage-azure-policy-e97e20a3.yml
+jobs:
+  apply-azure-policy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_e97e20a3}}
+        allow-no-subscriptions: true
+    - name: Create or Update Azure Policies
+      uses: azure/manage-azure-policy@v0
+      with:
+        paths: |
+          initiatives/Enable_Azure_Monitor_for_VMs_55f3eceb-5573-4f18-9695-226972c6d74a/**
+          policies/_Preview_Network_traffic_data_collection_agent_should_be_installed_on_Linux_virtual_machines_04c4380f-3fae-46e8-96c9-30193528f602/**
+          policies/Deploy_Diagnostic_Settings_for_Service_Bus_to_Log_Analytics_workspace_04d53d87-841c-4f23-8a5b-21564380b55e/**
+          policies/Deploy_Log_Analytics_extension_for_Linux_VMs_053d3325-282c-4e5c-b944-24faffd30d77/**
+          policies/Deploy_-_Configure_Log_Analytics_extension_to_be_enabled_on_Windows_virtual_machines_0868462e-646c-4fe3-9ced-a733534b6a2c/**
+          policies/Deploy_Diagnostic_Settings_for_Search_Services_to_Log_Analytics_workspace_08ba64b8-738f-4918-9686-730d2ed79c7d/**
+          policies/Deploy_-_Configure_Dependency_agent_to_be_enabled_on_Windows_virtual_machines_1c210e94-a481-4beb-95fa-1571b434fb04/**
+          policies/Deploy_-_Configure_Dependency_agent_to_be_enabled_on_Windows_virtual_machine_scale_sets_3be22e3b-d919-47aa-805e-8985dbeb0ad9/**
+          policies/Azure_Monitor_should_collect_activity_logs_from_all_regions_41388f1c-2db0-4c25-95b2-35d7f5ccbfa9/**
+          policies/Log_Analytics_extension_should_be_enabled_in_virtual_machine_scale_sets_for_listed_virtual_machine_images_5c3bc7b8-a64c-4e08-a9cd-7ff0f31e1138/**
+          policies/Azure_Machine_Learning_workspaces_should_use_user-assigned_managed_identity_5f0c7d88-c7de-45b8-ac49-db49e72eaa78/**
+          policies/Virtual_machines_should_have_the_Log_Analytics_extension_installed_a70ca396-0a34-413a-88e1-b956c1e683be/**
+          policies/_Preview_Log_Analytics_extension_should_be_installed_on_your_Windows_Azure_Arc_machines_d69b1763-b96d-40b8-a2d9-ca31e9fd0d3e/**
